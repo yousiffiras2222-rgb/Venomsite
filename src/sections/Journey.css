@@ -1,0 +1,208 @@
+.journey { overflow-x: clip; padding-top: 0; }
+.journey > .wrap:first-child { border-top: 1.5px solid var(--ink); padding-top: var(--chapter); }
+
+.journey__head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: var(--s-8) var(--s-16);
+  align-items: end;
+}
+.journey__head .t-h2 { max-width: 13ch; }
+.journey__intro { display: grid; gap: var(--s-4); padding-bottom: 0.4em; }
+.journey__intro .t-lead { max-width: 36ch; }
+.journey__note { color: var(--ink-3); max-width: 44ch; }
+
+/* ---------- The record: time / what happened / who signed ---------- */
+.record {
+  margin-top: clamp(3rem, 2rem + 4vw, 6rem);
+  --col-time: 168px;
+  --col-who: 320px;
+}
+.record__cols,
+.record__row {
+  display: grid;
+  grid-template-columns: var(--col-time) minmax(0, 1fr) var(--col-who);
+  gap: var(--s-8);
+}
+.record__cols {
+  padding-bottom: var(--s-3);
+  border-bottom: 1.5px solid var(--ink);
+  font-size: var(--t-small);
+  font-weight: var(--w-strong);
+  color: var(--ink-2);
+}
+.record__row {
+  position: relative;
+  padding-block: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.record__time-cell { position: relative; }
+.record__time {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--s-6));
+  display: block;
+  font-size: 1.375rem;
+  line-height: 1.2;
+  font-weight: var(--w-strong);
+  letter-spacing: -0.01em;
+  color: var(--ink-2);
+}
+.record__what { display: grid; gap: var(--s-3); align-content: start; max-width: 60ch; }
+.record__what > p { max-width: 54ch; }
+.record__artifact { margin-top: var(--s-3); }
+.record__tag {
+  justify-self: start;
+  font-size: var(--t-micro);
+  letter-spacing: var(--tr-micro);
+  color: var(--cora-ink);
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  background: var(--cora-wash);
+}
+.record__who { padding-top: 4px; }
+.record__note { font-size: var(--t-micro); letter-spacing: var(--tr-micro); color: var(--ink-3); }
+
+/* The relay: CORA prepared the case, a named person takes it */
+.relay { display: grid; gap: var(--s-2); }
+.relay__from { display: flex; align-items: center; gap: var(--s-3); }
+.relay__from > span { display: grid; gap: 1px; }
+.relay__cora { font-size: var(--t-small); font-weight: var(--w-strong); color: var(--cora-ink); }
+.relay__line {
+  display: block;
+  width: 0;
+  height: 26px;
+  margin-left: 13px;
+  border-left: 1.5px dashed var(--rule-strong);
+  transform-origin: top;
+}
+
+/* The handoff: the entry where a person signs. Heavier rules, green time, the stamp. */
+.record__row--handoff { border-bottom: 1.5px solid var(--ink); }
+.record__row:has(+ .record__row--handoff) { border-bottom: 1.5px solid var(--ink); }
+.record__row--handoff .record__time { color: var(--green-ink); }
+
+/* Only the handoff row gets its own choreography; every other row uses the page reveal */
+.js-motion .record__row--handoff .relay__from { opacity: 0; transform: translateY(6px); }
+.js-motion .record__row--handoff .relay__line { transform: scaleY(0); }
+.js-motion .record__row--handoff .relay .attendee { opacity: 0; transform: translateX(10px); }
+.js-motion .record__row--handoff .attendee__stamp { opacity: 0; transform: rotate(-12deg) scale(1.2); }
+.js-motion .record__row--handoff.is-in .relay__from { animation: relay-in 520ms var(--ease-out) 260ms both; }
+.js-motion .record__row--handoff.is-in .relay__line { animation: relay-line 420ms var(--ease-out) 620ms both; }
+.js-motion .record__row--handoff.is-in .relay .attendee { animation: relay-in 620ms var(--ease-out) 900ms both; }
+.js-motion .record__row--handoff.is-in .attendee__stamp { animation: stamp-press 560ms var(--ease-out) 1400ms both; }
+@keyframes relay-in { from { opacity: 0; transform: translate(10px, 0); } to { opacity: 1; transform: none; } }
+@keyframes relay-line { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes stamp-press {
+  0% { opacity: 0; transform: rotate(-4deg) scale(1.2); }
+  70% { opacity: 0.92; }
+  100% { opacity: 0.92; transform: rotate(-12deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-motion .record__row--handoff .relay__from,
+  .js-motion .record__row--handoff .relay .attendee,
+  .js-motion .record__row--handoff.is-in .relay__from,
+  .js-motion .record__row--handoff.is-in .relay .attendee { animation: none; opacity: 1; transform: none; }
+  .js-motion .record__row--handoff .relay__line,
+  .js-motion .record__row--handoff.is-in .relay__line { animation: none; transform: none; }
+  .js-motion .record__row--handoff .attendee__stamp,
+  .js-motion .record__row--handoff.is-in .attendee__stamp { animation: none; opacity: 0.92; transform: rotate(-12deg); }
+}
+
+/* ---------- Artifacts: the conversation itself, no phone chrome ---------- */
+.bubble {
+  display: flex;
+  gap: var(--s-3);
+  align-items: flex-end;
+  max-width: 46ch;
+}
+.bubble__body {
+  padding: var(--s-3) var(--s-4);
+  border-radius: 18px 18px 18px 6px;
+  background: var(--paper-2);
+  font-size: var(--t-small);
+  line-height: 1.45;
+}
+.bubble__from { display: block; font-size: var(--t-micro); font-weight: var(--w-strong); color: var(--ink-3); margin-bottom: 2px; }
+.bubble--patient .bubble__body { background: var(--patient-wash); }
+.bubble--patient .bubble__from { color: var(--green-ink); }
+.bubble--doctor .bubble__body { background: var(--paper-2); }
+.bubble--doctor .bubble__from { color: var(--ink); }
+
+.thread { display: grid; gap: var(--s-3); }
+.thread .bubble--patient { margin-left: var(--s-12); }
+
+.chips { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.chips li {
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--cora-line);
+  color: var(--cora-ink);
+  font-size: var(--t-small);
+  background: var(--paper);
+}
+
+/* Plan and vitals read as ruled lines of the record, not boxes */
+.plan, .vitals {
+  display: grid;
+  gap: 0;
+  max-width: 380px;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.plan li {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) 0;
+  font-size: var(--t-small);
+}
+.plan li + li, .vitals > div + div { border-top: 1px solid var(--rule); }
+.plan .icon { color: var(--green-ink); flex: none; }
+.vitals > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-3) 0;
+  font-size: var(--t-small);
+}
+.vitals dt { display: inline-flex; align-items: center; gap: var(--s-2); }
+.vitals dt .icon { color: var(--nut-ink); }
+.vitals dd { margin: 0; color: var(--ink-2); }
+
+.journey__privacy {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-12);
+  font-size: var(--t-lead);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  color: var(--ink);
+  max-width: 48ch;
+}
+.journey__privacy .icon { flex: none; color: var(--green-ink); }
+
+@media (max-width: 1100px) {
+  .record { --col-time: 120px; --col-who: 260px; }
+}
+@media (max-width: 860px) {
+  .journey { overflow-x: clip; padding-top: 0; }
+.journey > .wrap:first-child { border-top: 1.5px solid var(--ink); padding-top: var(--chapter); }
+
+.journey__head { grid-template-columns: 1fr; }
+  .record__cols { display: none; }
+  .record { border-top: 1.5px solid var(--ink); }
+  .record__row {
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+  .record__time { font-size: 1.125rem; position: static; }
+  .record__who {
+    padding-top: var(--s-4);
+    border-top: 1px dashed var(--rule-strong);
+  }
+
+  .attendee__stamp { right: 0; top: -14px; }
+  .thread .bubble--patient { margin-left: var(--s-6); }
+}

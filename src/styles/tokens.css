@@ -1,0 +1,135 @@
+/* ------------------------------------------------------------------
+   Diagnostikare design tokens
+   World: a personal care record where every entry is signed by a person.
+   Brand greens and accents come from diagnostikare.com (--bosque,
+   --verde-salud, --mandarina, --lila-tinta, --cora), refined for contrast.
+   ------------------------------------------------------------------ */
+
+:root {
+  /* Brand */
+  --forest: #003b1f;          /* "bosque": chapters, primary actions */
+  --forest-deep: #002614;     /* footer, pressed states */
+  --forest-raised: #0b4a2c;   /* hover on forest */
+  --forest-line: #1f5539;     /* rules on forest */
+  --green: #00af76;           /* "verde salud": stamps, live states (non-text on light) */
+  --green-ink: #00704b;
+  --stamp: #009467;           /* stamp ink: a shade under verde salud, so it reads on paper */       /* green when it has to be read on paper */
+  --green-on-forest: #5ddcaa; /* green when it has to be read on forest */
+  --logo-ink-brand: #034324;
+  --logo-leaf-brand: #21ad80;
+
+  /* Discipline tabs: one color per kind of care, from the brand palette */
+  --med: #00af76;             /* medicina */
+  --med-ink: #00704b;
+  --nut: #f06414;             /* nutrición, "mandarina" */
+  --nut-ink: #a8400a;
+  --psi: #7f8ff2;             /* psicología, from "lila" toward "lila tinta" */
+  --psi-ink: #3a3994;
+  --cora: #5c51f7;            /* CORA's own mark only */
+  --cora-ink: #4237d6;
+  --cora-wash: #ecebff;
+  --cora-line: #c9c4fb;
+  --patient-wash: #dff5e8;
+  --danger: #b3261e;
+  --field-border: #87958d;   /* 3.2:1 on paper, meets non-text contrast */
+  --focus-wash: #cfe6db;
+
+  /* Paper and ink */
+  --paper: #ffffff;
+  --paper-2: #f3f6f4;         /* alternate chapter ground, green-grey, never cream */
+  --paper-3: #e9eeea;
+  --ink: #0f1d16;
+  --ink-2: #3c4b43;
+  --ink-3: #5f6e66;
+  --rule: #dde4df;
+  --rule-strong: #c4cfc8;
+
+  /* On forest */
+  --on-forest: #ffffff;
+  --on-forest-2: #c6dccf;
+  --on-forest-3: #93b8a4;
+
+  /* Photo slot fields: flat, untinted placeholders with their own caption ink */
+  --slot-forest: #0e4a2e;   --slot-forest-ink: #cfe4d7;  --slot-forest-tick: #3d7458;
+  --slot-forest-2: #1a5c3c; --slot-forest-2-ink: #dcebe1; --slot-forest-2-tick: #5a9174;
+  --slot-sage: #dde7e0;     --slot-sage-ink: #2c4638;    --slot-sage-tick: #9db5a6;
+  --slot-bone: #e8e8de;     --slot-bone-ink: #45453a;    --slot-bone-tick: #b4b4a4;
+  --slot-nut: #fbe2d2;      --slot-nut-ink: #7f3509;     --slot-nut-tick: #eab08e;
+  --slot-psi: #e2e6fc;      --slot-psi-ink: #33337f;     --slot-psi-tick: #a9b2ef;
+
+  /* Type: one family, sized like a confident printed record */
+  --font: "Onest Variable", "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --t-display: clamp(2.6rem, 1.15rem + 5.2vw, 6rem);
+  --t-statement: clamp(2.1rem, 1.05rem + 3.4vw, 4.4rem);
+  --t-h2: clamp(2.1rem, 1.25rem + 2.9vw, 4rem);
+  --t-h3: clamp(1.35rem, 1.12rem + 0.7vw, 1.75rem);
+  --t-lead: clamp(1.18rem, 1.06rem + 0.45vw, 1.5rem);
+  --t-body: 1.0625rem;
+  --t-small: 0.9375rem;
+  --t-micro: 0.8125rem;
+
+  --lh-display: 1.0;
+  --lh-h2: 1.04;
+  --lh-h3: 1.18;
+  --lh-lead: 1.42;
+  --lh-body: 1.56;
+  --lh-small: 1.46;
+
+  /* Tracking is size-specific: tight when large, open when small */
+  --tr-display: -0.034em;
+  --tr-h2: -0.03em;
+  --tr-h3: -0.014em;
+  --tr-lead: -0.006em;
+  --tr-body: 0;
+  --tr-small: 0.004em;
+  --tr-micro: 0.012em;
+
+  --w-display: 680;
+  --w-h2: 660;
+  --w-h3: 620;
+  --w-strong: 600;
+  --w-body: 400;
+
+  /* Space: 4px base, generous at chapter scale */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.25rem;
+  --s-6: 1.5rem;
+  --s-8: 2rem;
+  --s-10: 2.5rem;
+  --s-12: 3rem;
+  --s-16: 4rem;
+  --s-20: 5rem;
+  --s-24: 6rem;
+  --chapter: clamp(5.5rem, 3rem + 9vw, 11rem);
+  --gutter: clamp(1rem, 0.4rem + 3vw, 3rem);
+  --wrap: 1240px;
+  --wrap-narrow: 980px;
+  --measure: 62ch;
+
+  /* Shape */
+  --r-xs: 4px;
+  --r-s: 8px;
+  --r-m: 14px;
+  --r-l: 24px;
+  --r-pill: 999px;
+
+  /* Depth: offset, soft, green-tinted */
+  --shadow-slip: 0 1px 1px rgba(0, 38, 20, 0.06), 0 10px 28px -10px rgba(0, 38, 20, 0.28), 0 30px 60px -30px rgba(0, 38, 20, 0.22);
+  --shadow-nav: 0 1px 0 rgba(0, 38, 20, 0.08);
+
+  /* Motion: calm, exponential ease-out */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-med: 320ms;
+  --dur-slow: 760ms;
+
+  /* Chrome */
+  --nav-h: 60px;
+  --focus: 0 0 0 3px var(--paper), 0 0 0 5px var(--green-ink);
+  --focus-on-forest: 0 0 0 3px var(--forest), 0 0 0 5px var(--green-on-forest);
+}

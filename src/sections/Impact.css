@@ -1,0 +1,99 @@
+.impact__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: var(--s-12) clamp(2rem, 1rem + 5vw, 6.5rem);
+  align-items: start;
+}
+
+.impact__statement {
+  max-width: 17ch;
+  color: var(--on-forest);
+}
+.impact__num {
+  color: var(--green-on-forest);
+  font-weight: 760;
+  letter-spacing: -0.045em;
+}
+.impact__source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-2) var(--s-3);
+  margin-top: var(--s-8);
+  max-width: 58ch;
+  color: var(--on-forest-2);
+  font-size: var(--t-body);
+}
+.impact__source-tag {
+  font-size: var(--t-micro);
+  font-weight: var(--w-strong);
+  letter-spacing: var(--tr-micro);
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--forest-line);
+  color: var(--on-forest);
+}
+
+/* The face beside the number */
+.impact__story {
+  margin: 0;
+  display: grid;
+  gap: var(--s-5);
+  position: sticky;
+  top: calc(var(--nav-h) + var(--s-8));
+}
+.impact__story > figcaption { display: grid; gap: var(--s-2); }
+.impact__template {
+  margin: 0;
+  font-size: var(--t-h3);
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  font-weight: 500;
+  color: var(--on-forest);
+  max-width: 30ch;
+  text-indent: -0.4em;
+}
+.impact__byline { font-size: var(--t-small); color: var(--on-forest-3); }
+
+/* The ledger: each number keeps its source attached */
+.impact__ledger { margin-top: clamp(3rem, 2rem + 3vw, 5rem); }
+.impact__ledger dl { border-top: 1.5px solid var(--on-forest-3); }
+.impact__row {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr) auto;
+  gap: var(--s-6);
+  align-items: baseline;
+  padding-block: var(--s-5);
+  border-bottom: 1px solid var(--forest-line);
+}
+.impact__value {
+  font-size: clamp(2rem, 1.5rem + 1.4vw, 2.75rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-weight: var(--w-h2);
+  color: var(--on-forest);
+}
+.impact__label { margin: 0; font-size: 1.125rem; line-height: 1.35; color: var(--on-forest); }
+.impact__src {
+  margin: 0;
+  font-size: var(--t-micro);
+  letter-spacing: var(--tr-micro);
+  color: var(--on-forest-3);
+  white-space: nowrap;
+}
+.impact__gender { margin-top: var(--s-6); color: var(--on-forest-2); font-size: var(--t-small); max-width: 52ch; }
+
+@media (max-width: 900px) {
+  .impact__grid { grid-template-columns: 1fr; }
+  .impact__numbers { display: contents; }
+  .impact__statement { order: 1; }
+  .impact__source { order: 2; }
+  .impact__story { position: static; max-width: 460px; order: 3; margin-top: var(--s-4); }
+  .impact__ledger { order: 4; margin-top: 0; }
+  .impact__story .slot { --slot-ratio: 4 / 3; }
+  .impact__template { text-indent: 0; }
+}
+@media (max-width: 520px) {
+  .impact__row { grid-template-columns: 5.25rem minmax(0, 1fr); gap: var(--s-1) var(--s-4); }
+  .impact__src { grid-column: 2; }
+}

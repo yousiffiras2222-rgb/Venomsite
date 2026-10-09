@@ -1,0 +1,111 @@
+/* ---------- Discipline tag ---------- */
+.dtag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: var(--t-small);
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+.dtag__tab {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 2px 5px 2px 5px;  /* echoes the leaf in the isotipo */
+  background: var(--med);
+}
+.dtag--nut .dtag__tab { background: var(--nut); }
+.dtag--psi .dtag__tab { background: var(--psi); }
+.dtag--cora .dtag__tab { background: var(--cora); }
+.on-forest .dtag { color: var(--on-forest-2); }
+
+/* ---------- CORA mark ---------- */
+.cora-mark {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  border-radius: 30%;
+  background: var(--cora);
+  color: #fff;
+}
+
+/* ---------- Attendee ---------- */
+.attendee {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-4);
+}
+.attendee__text { display: grid; gap: 3px; min-width: 0; }
+.attendee__verb { font-size: var(--t-micro); letter-spacing: var(--tr-micro); color: var(--ink-3); }
+.attendee__name { font-weight: var(--w-strong); font-size: 1.0625rem; line-height: 1.25; letter-spacing: -0.006em; }
+.attendee__role { font-size: var(--t-small); color: var(--ink-2); }
+.attendee--cora .attendee__name { color: var(--cora-ink); }
+.attendee__license { font-size: var(--t-micro); color: var(--ink-3); letter-spacing: var(--tr-micro); }
+.attendee__stamp {
+  position: absolute;
+  right: -18px;
+  bottom: -54px;
+  color: var(--stamp);
+  transform: rotate(-12deg);
+  mix-blend-mode: multiply;
+  opacity: 0.92;
+  pointer-events: none;
+}
+
+/* ---------- Hero record slip ---------- */
+.slip {
+  position: relative;
+  width: min(380px, 100%);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--r-m);
+  box-shadow: var(--shadow-slip);
+  padding: var(--s-5) var(--s-6) var(--s-6);
+  display: grid;
+  gap: var(--s-4);
+}
+.slip__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: var(--t-micro);
+  letter-spacing: var(--tr-micro);
+  color: var(--ink-3);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--rule);
+}
+.slip__when { color: var(--ink-2); font-weight: var(--w-strong); }
+.slip__sample {
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: var(--paper-2);
+  color: var(--ink-3);
+}
+.slip__who { display: flex; gap: var(--s-4); align-items: flex-start; }
+.slip__who > div { display: grid; gap: 2px; }
+.slip__label { font-size: var(--t-micro); color: var(--ink-3); letter-spacing: var(--tr-micro); }
+.slip__name { font-size: 1.25rem; line-height: 1.2; font-weight: var(--w-h3); letter-spacing: -0.012em; }
+.slip__role { margin-top: 2px; }
+.slip__license { font-size: var(--t-micro); color: var(--ink-3); letter-spacing: var(--tr-micro); }
+.slip__rows {
+  display: grid;
+  padding-right: 64px;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-1) var(--s-4);
+  padding-top: var(--s-3);
+  border-top: 1px dashed var(--rule-strong);
+  font-size: var(--t-small);
+}
+.slip__rows dt { color: var(--ink-3); }
+.slip__rows dd { margin: 0; color: var(--ink); font-weight: 500; }
+.slip__stamp {
+  position: absolute;
+  right: -46px;
+  bottom: -40px;
+  color: var(--stamp);
+  transform: rotate(-14deg);
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+  pointer-events: none;
+}

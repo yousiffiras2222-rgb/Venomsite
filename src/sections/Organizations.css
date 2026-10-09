@@ -1,0 +1,57 @@
+.orgs__head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: var(--s-8) var(--s-16);
+  align-items: end;
+}
+.orgs__head .t-h2 { max-width: 14ch; }
+.orgs__head .t-lead { max-width: 34ch; padding-bottom: 0.4em; }
+
+.orgs__rows { margin-top: clamp(3rem, 2rem + 3vw, 5rem); border-top: 1.5px solid var(--ink); }
+.orgs__row {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: var(--s-8) var(--s-16);
+  padding-block: var(--s-8);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.orgs__row > div { display: grid; gap: var(--s-3); }
+.orgs__row p {
+  font-size: var(--t-lead);
+  line-height: 1.42;
+  letter-spacing: -0.006em;
+  color: var(--ink-2);
+  max-width: 46ch;
+}
+.orgs__row p.orgs__detail { font-size: var(--t-body); line-height: var(--lh-body); max-width: 54ch; }
+
+/* Privacy as a record: what HR sees, what it never sees */
+.orgs__privacy {
+  margin-top: clamp(3rem, 2rem + 3vw, 5rem);
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.orgs__privacy > div {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: var(--s-3) var(--s-16);
+  padding-block: var(--s-6);
+}
+.orgs__privacy > div + div { border-top: 1px solid var(--rule-strong); }
+.orgs__privacy dt {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: 1.25rem;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  font-weight: var(--w-h3);
+}
+.orgs__privacy dt .icon { color: var(--green-ink); flex: none; }
+.orgs__privacy > div:last-child dt .icon { color: var(--ink-2); }
+.orgs__privacy dd { margin: 0; font-size: 1.125rem; line-height: 1.45; color: var(--ink-2); max-width: 46ch; }
+
+@media (max-width: 860px) {
+  .orgs__head, .orgs__row, .orgs__privacy > div { grid-template-columns: 1fr; }
+  .orgs__row { gap: var(--s-3); padding-block: var(--s-6); }
+}

@@ -1,0 +1,142 @@
+/* Translucent sticky bar: content scrolls underneath, tone follows the ground. */
+.nav {
+  --nav-bg: rgba(255, 255, 255, 0.74);
+  --nav-fg: var(--ink);
+  --nav-fg-2: var(--ink-2);
+  --logo-ink: var(--logo-ink-brand);
+  --logo-leaf: var(--logo-leaf-brand);
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  color: var(--nav-fg);
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  transition: background-color var(--dur-med) var(--ease-out), color var(--dur-med) var(--ease-out), box-shadow var(--dur-med) var(--ease-out);
+}
+.nav--scrolled { box-shadow: var(--shadow-nav); }
+.nav--dark {
+  --nav-bg: rgba(0, 38, 20, 0.42);
+  --nav-fg: var(--on-forest);
+  --nav-fg-2: var(--on-forest-2);
+  --logo-ink: #ffffff;
+  --logo-leaf: var(--green-on-forest);
+  box-shadow: none;
+}
+.nav--dark.nav--scrolled { --nav-bg: rgba(0, 38, 20, 0.62); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08); }
+.nav--dark :focus-visible { box-shadow: var(--focus-on-forest); }
+
+.nav__bar {
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  gap: var(--s-8);
+}
+.nav__logo { display: inline-flex; flex: none; padding: 6px 0; border-radius: var(--r-xs); }
+.nav__logo .logo { width: 152px; height: auto; }
+.logo path { transition: fill var(--dur-med) var(--ease-out); }
+
+.nav__links {
+  display: flex;
+  gap: var(--s-6);
+  margin-inline: auto;
+}
+.nav__links a,
+.nav__patient {
+  font-size: 0.9375rem;
+  letter-spacing: 0.002em;
+  color: var(--nav-fg-2);
+  text-decoration: none;
+  padding: 6px 2px;
+  border-radius: var(--r-xs);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.nav__links a:hover,
+.nav__patient:hover,
+.nav__links a[aria-current="page"] { color: var(--nav-fg); }
+.nav__links a[aria-current="page"] { font-weight: var(--w-strong); }
+
+.nav__actions { display: flex; align-items: center; gap: var(--s-5); flex: none; }
+
+.lang { display: inline-flex; align-items: center; gap: 2px; }
+.lang__btn {
+  border: 0;
+  background: transparent;
+  color: var(--nav-fg-2, var(--ink-2));
+  font-size: var(--t-micro);
+  font-weight: var(--w-strong);
+  letter-spacing: 0.04em;
+  padding: 6px 7px;
+  border-radius: var(--r-xs);
+  min-width: 32px;
+  min-height: 32px;
+}
+.lang__btn[aria-pressed="true"] { color: var(--nav-fg, var(--ink)); text-decoration: underline; text-underline-offset: 0.35em; text-decoration-thickness: 1.5px; }
+.lang__btn:hover { color: var(--nav-fg, var(--ink)); }
+
+.nav__menu {
+  display: none;
+  border: 0;
+  background: transparent;
+  color: var(--nav-fg);
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  place-items: center;
+  border-radius: var(--r-s);
+}
+
+.nav__sheet {
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  height: calc(100dvh - var(--nav-h));
+  overflow-y: auto;
+  padding-block: var(--s-8) var(--s-12);
+}
+.nav__sheet[hidden] { display: none; }
+.nav__sheet-links { display: grid; gap: var(--s-1); }
+.nav__sheet-links a {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: var(--w-h3);
+  text-decoration: none;
+  padding: var(--s-3) 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+}
+.nav__sheet-links .nav__sheet-patient { color: var(--green-ink); }
+.nav__sheet-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin-top: var(--s-8);
+}
+.nav__sheet-foot .lang__btn { font-size: var(--t-small); }
+.nav--open { --nav-bg: var(--paper); }
+html.menu-open { overflow: hidden; }
+
+@media (max-width: 1080px) {
+  .nav__links { gap: var(--s-4); }
+  .nav__bar { gap: var(--s-5); }
+  .nav__actions { gap: var(--s-3); }
+}
+@media (max-width: 920px) {
+  .nav__links, .nav__lang { display: none; }
+  .nav__menu { display: inline-grid; }
+  .nav__actions { margin-left: auto; gap: var(--s-3); }
+  .nav__logo .logo { width: 136px; }
+}
+@media (max-width: 420px) {
+  .nav__actions .btn { display: none; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .nav { --nav-bg: var(--paper); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .nav--dark { --nav-bg: var(--forest); }
+}
+@media (prefers-contrast: more) {
+  .nav { --nav-bg: var(--paper); box-shadow: 0 1px 0 var(--ink); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .nav--dark { --nav-bg: var(--forest-deep); }
+}

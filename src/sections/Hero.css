@@ -1,0 +1,106 @@
+/* The hero is a forest chapter with one framed object in it: the clinician's photo,
+   and today's signed entry from her record overlapping its lower edge and hanging
+   into the next chapter. */
+.hero {
+  --hang: clamp(4.5rem, 3rem + 2.5vw, 5.75rem);   /* how far the slip hangs below the field */
+  position: relative;
+  background: var(--paper);
+  color: var(--on-forest);
+  isolation: isolate;
+}
+.hero__field {
+  position: absolute;
+  inset: 0 0 var(--hang) 0;
+  z-index: -1;
+  background: var(--forest);
+  transform-origin: 50% 0%;
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
+  gap: var(--s-12) clamp(2rem, 1rem + 4vw, 5rem);
+  align-items: stretch;
+  padding-top: calc(var(--nav-h) + clamp(2rem, 1rem + 2.5vw, 3.5rem));
+}
+.hero__copy { align-self: end; padding-bottom: calc(var(--hang) + clamp(2rem, 1rem + 2vw, 3rem)); }
+.hero__title { color: var(--on-forest); max-width: 12.5ch; font-size: clamp(2.6rem, 1.1rem + 4.9vw, 5.25rem); }
+.hero__lead {
+  margin-top: var(--s-6);
+  max-width: 44ch;
+  color: var(--on-forest-2);
+}
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4) var(--s-8);
+  margin-top: var(--s-8);
+}
+.hero__team-link {
+  color: var(--on-forest);
+  font-weight: var(--w-strong);
+  font-size: 1.0625rem;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  text-underline-offset: 0.3em;
+  padding: 10px 0;
+  border-radius: var(--r-xs);
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
+}
+.hero__team-link:hover { text-decoration-color: currentColor; }
+.hero :focus-visible { box-shadow: var(--focus-on-forest); }
+.hero__patient { margin-top: var(--s-5); color: var(--on-forest-2); font-size: var(--t-body); }
+.hero__patient a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--on-forest);
+  font-weight: var(--w-strong);
+  text-underline-offset: 0.25em;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+  border-radius: var(--r-xs);
+}
+.hero__patient a:hover { text-decoration-color: currentColor; }
+.hero__since { margin-top: var(--s-4); color: var(--on-forest-3); }
+
+/* The framed photo object */
+.hero__visual { position: relative; display: flex; flex-direction: column; }
+.hero__photo { --slot-ratio: auto; flex: 1 1 auto; min-height: 420px; border-radius: var(--r-l); }
+.hero__photo .slot__cap { justify-content: flex-start; padding-top: 60px; }
+.hero__slip {
+  position: relative;
+  z-index: 2;
+  margin-top: calc(-1 * clamp(7rem, 5rem + 4vw, 10rem));
+  margin-left: calc(-1 * clamp(1.5rem, 0.5rem + 4vw, 5rem));
+  padding-right: 34px;
+}
+
+/* Calm, scroll-linked settle as the hero leaves: the field insets into the page */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__field {
+      animation: hero-settle linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0px 70vh;
+    }
+    @keyframes hero-settle {
+      to { transform: scale(0.96); border-radius: 0 0 28px 28px; }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero__inner { grid-template-columns: 1fr; gap: var(--s-10); }
+  .hero__copy { padding-bottom: 0; }
+  .hero__visual { display: block; }
+  .hero__photo { --slot-ratio: 4 / 3; flex: none; min-height: 0; border-radius: var(--r-m); }
+  .hero__slip { margin-top: calc(-1 * var(--s-20)); margin-left: var(--s-6); }
+}
+@media (max-width: 640px) {
+  .hero__inner { padding-top: calc(var(--nav-h) + var(--s-12)); }
+  .hero__lead { margin-top: var(--s-6); }
+  .hero__actions { margin-top: var(--s-8); }
+  .hero__slip { margin-top: calc(-1 * var(--s-16)); margin-left: var(--s-3); padding-right: 30px; }
+  .slip__stamp { right: -26px; bottom: -46px; width: 92px; height: 92px; }
+}
